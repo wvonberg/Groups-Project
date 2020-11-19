@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Groups</title>
+    {%load static%}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script defer src="{%static 'groups.js'%}"></script>
+</head>
+<body>
+    <div id="wrapper">
+        <h1>Hi {{request.session.user_name}}!</h1>
+        <a href="/logout">Logout</a>
+
+        <div id="groups" class="content">
+            <h2>Here are the organizations you can join:</h2>
+
+            {%for group in all_groups%}
+            <div class="group">
+                <h3><a href="/groups/{{group.id}}">{{group.name}}</a></h3>
+                <p>{{group.location}}</p>
+                <p>Members: {{group.members.count}}</p>
+                <p>Description : {{group.description}}</p>
+            </div>
+            {%endfor%}
+
+
+        </div>
+
+        <div class="content">
+            <h2>Create a new organization</h2>
+            {%for message in messages%}
+            <p>{{message}}</p>
+            {%endfor%}
+            <form id="createOrg" action="/create_org" method="post">
+                {%csrf_token%}
+                <label>Name</label>
+                <input id='orgName' type="text" name="name">
+                <label>Location</label>
+                <input type="text" name="location">
+                <label>Description</label>
+                <input type="text" name="description">
+                <input type="submit" class='submit' value="Create Org">
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

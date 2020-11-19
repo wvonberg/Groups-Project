@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{group.name}}</title>
+    {%load static%}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body>
+    <div id="wrapper">
+        <h1>{{group.name}}</h1>
+        <p id='location'>{{group.location}}</p>
+        <a href="/groups">Dashboard</a>
+        <a href="/logout">Logout</a>
+        {%if user in group.members.all%}
+        <form action="/remove_member/{{group.id}}">
+            <input type="submit" value="Leave Org">
+        </form>
+        {%else%}
+        <form action="/add_member/{{group.id}}">
+            <input type="submit" value="Join Org">
+        </form>
+        {%endif%}
+        <p>{{group.description}}</p>
+        <div id="map"></div>
+        <p>Creator: {{group.creator.first_name}} {{group.creator.last_name}}</p>
+        <h2>Members:</h2>
+        <ul>
+            {%for member in group.members.all%}
+            <li>{{member.first_name}} {{member.last_name}}</li>
+            {%endfor%}
+        </ul>
+    </div>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAnUWrN0eVNZ5Ju5cnjhdn9mmmfy-FCUqM&callback=initMap"
+        type="text/javascript"></script>
+
+    <script>
+        // Initialize and add the map
+        function initMap() {
+            // The location of Uluru
+            geocoder = new google.maps.Geocoder();
+            geocoder.geocode({
+                'address': document.getElementById("location").innerHTML
+            }, function (results, status) {
+                if (status == 'OK') {
+                    const map = new google.maps.Map(document.getElementById('map'), {
+                        zoom: 6,
+                        center: results[0].geometry.location,
+                    });
+                    var marker = new google.maps.Marker({
+                        map: map,
+                        position: results[0].geometry.location
+                    });
+                } else {
+                    alert('Geocode was not successful for the following reason: ' + status);
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

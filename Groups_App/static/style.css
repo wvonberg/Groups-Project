@@ -1,0 +1,71 @@
+* {
+    width: auto;
+}
+
+#map {
+    height: 300px;
+    width: 45%;
+}
+
+#messages {
+    background-color: rgb(244, 96, 96);
+    font-weight: bold;
+    color: black;
+}
+
+#messages li {
+    display: inline-block;
+    margin: 10px;
+}
+
+
+#wrapper {
+    margin: 0 auto;
+    margin-top: 15%;
+    margin-left: 19%;
+    width: 1200px;
+    font-family: sans-serif;
+}
+.form {
+    display: inline-block;
+    border: 3px solid black;
+    border-radius: 5px;
+    width: 400px;
+    text-align: center;
+    vertical-align: top;
+    margin: 25px ;
+}
+label {
+    font-weight: bold;
+}
+
+input{
+    display: block;
+    margin-bottom: 10px;
+    padding: 5px;
+    border-radius: 10px;
+    background-color: rgb(229, 224, 235);
+    margin-left: 110px;
+}
+
+.submit {
+    background-color: indigo;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 10px;
+    margin: 25px 0 25px 180px;
+    
+}
+
+.content {
+    display: inline-block;
+    border: 5px solid black;
+    vertical-align: top;
+    padding: 25px;
+}
+.group {
+    border: 5px solid black;
+    padding: 25px;
+    margin-top: 10px;
+    box-shadow: 3px 3px 3px rgb(131, 131, 131);
+}
